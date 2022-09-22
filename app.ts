@@ -32,7 +32,7 @@ async function serveHttp(conn: Deno.Conn) {
         }
         resource = Deno.cwd()+"/public"+resource;
         console.log(resource);
-        var fileContent = Deno.readFileSync(resource);
+        var fileContent = await Deno.readFile(resource);
         requestEvent.respondWith(
           new Response(fileContent, {
             status: 200,
