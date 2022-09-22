@@ -8,7 +8,6 @@ for await (const conn of server) {
   // without awaiting the function
   serveHttp(conn);
 }
-
 async function serveHttp(conn: Deno.Conn) {
   // This "upgrades" a network connection into an HTTP connection.
   const httpConn = Deno.serveHttp(conn);
@@ -18,7 +17,7 @@ async function serveHttp(conn: Deno.Conn) {
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
     const path = new URL(requestEvent.request.url);
-    const resource = (path.pathname=="/")?"/index.html":path.pathname;
+    var resource = (path.pathname=="/")?"/index.html":path.pathname;
     try{
        
         var contentType;
@@ -31,8 +30,9 @@ async function serveHttp(conn: Deno.Conn) {
         }else {
             contentType = "image/jpeg";
         }
+        resource = Deno.cwd()+"/public"+resource;
         console.log(resource);
-        var fileContent = Deno.readFileSync("./public"+resource);
+        var fileContent = Deno.readFileSync(resource);
         requestEvent.respondWith(
           new Response(fileContent, {
             status: 200,
