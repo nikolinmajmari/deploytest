@@ -18,7 +18,7 @@ async function serveHttp(conn: Deno.Conn) {
     // objects.
     const path = new URL(requestEvent.request.url);
     var resource = (path.pathname=="/")?"/index.html":path.pathname;
-    try{
+    // try{
        
         var contentType;
         if(resource.includes(".html")){
@@ -41,15 +41,16 @@ async function serveHttp(conn: Deno.Conn) {
             }
           }),
         );
-    }catch(e){
-        requestEvent.respondWith(
-            new Response(
-                "Not Found",
-                {
-                    status:404
-                }
-            )
-        )
-    }
+    // }catch(e){
+    //     throw e;
+    //     requestEvent.respondWith(
+    //         new Response(
+    //             "Not Found",
+    //             {
+    //                 status:404
+    //             }
+    //         )
+    //     )
+    // }
   }
 }
