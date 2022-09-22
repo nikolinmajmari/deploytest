@@ -1,5 +1,5 @@
 // Start listening on port 8080 of localhost.
-const server = Deno.listen({ port: 3000 });
+const server = Deno.listen({ port: 80 });
 console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
 
 // Connections to the server will be yielded up as an async iterable.
