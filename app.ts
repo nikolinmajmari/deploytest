@@ -20,7 +20,7 @@ async function serveHttp(conn: Deno.Conn) {
     const path = new URL(requestEvent.request.url);
     const resource = (path.pathname=="/")?"/index.html":path.pathname;
     try{
-        var fileContent = Deno.readFileSync("./public"+resource);
+       
         var contentType;
         if(resource.includes(".html")){
             contentType = "text/html";
@@ -31,8 +31,8 @@ async function serveHttp(conn: Deno.Conn) {
         }else {
             contentType = "image/jpeg";
         }
-    
         console.log(resource);
+        var fileContent = Deno.readFileSync("./public"+resource);
         requestEvent.respondWith(
           new Response(fileContent, {
             status: 200,
